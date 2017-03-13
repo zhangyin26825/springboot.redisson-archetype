@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Maven骨架</title>
+    <link href="http://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap-theme.css" rel="stylesheet">
+    <link href="http://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.css" rel="stylesheet">
+</head>
+<body>
+<div class="container">
+    <div class="row clearfix">
+        <div class="col-md-2 column">
+        </div>
+        <div class="col-md-8 column">
+            <div class="row clearfix">
+                <div class="col-md-12 column">
+                    <form role="form">
+                        <div class="form-group">
+                            <label for="groupId">groupId</label><input type="text" class="form-control" id="groupId"  value="com.weijuju.iag"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="version">version</label><input type="text" class="form-control" id="version"  value="1.0-SNAPSHOT"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="databaseName">数据库名</label><input type="text" class="form-control" id="databaseName" />
+                        </div>
+                        <div class="form-group">
+                            <label for="projectName">项目名</label><input type="text" class="form-control" id="projectName" placeholder="只支持单个单词" />
+                        </div>
+                        <div class="form-group">
+                            <label for="basePackage">包名</label><input type="text" class="form-control" id="basePackage" placeholder="默认值为 groupId+项目名" />
+                        </div>
+                        <div class="form-group">
+                            <label for="artifactId">artifactId</label><input type="text" class="form-control" id="artifactId" placeholder="默认值为 项目名" />
+                        </div>
+                        <div class="form-group">
+                            <label for="RedisDB">RedisDB</label><input type="text" class="form-control" id="RedisDB" value="7" placeholder="Redis数据库" />
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <h2>
+                Maven命令
+            </h2>
+            <p id="mvn">
+
+            </p>
+            <p>
+                <!--<a class="btn" href="#">View details »</a>-->
+            </p>
+        </div>
+        <div class="col-md-2 column">
+        </div>
+    </div>
+</div>
+
+</body>
+<script src="http://cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+<script src="http://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.js"></script>
+<script type="application/javascript">
+    $(function () {
+        $("#projectName").change(function(){
+           var projectName=$("#projectName").val();
+            var groupId=$("#groupId").val();
+            $("#basePackage").val(groupId+"."+projectName);
+            $("#artifactId").val(projectName);
+            generateMVN();
+        });
+        function  generateMVN(){
+            var groupId=$("#groupId").val();
+            var version=$("#version").val();
+            var databaseName=$("#databaseName").val();
+            var projectName=$("#projectName").val();
+            var basePackage=$("#basePackage").val();
+            var artifactId=$("#artifactId").val();
+            var redisDB=$("#RedisDB").val();
+            if(databaseName.length==0||projectName.length==0||basePackage.length==0||artifactId.length==0||redisDB.length==0){
+                $("#mvn").text("表单需要全部填写");
+                return;
+            }
+            var text="mvn archetype:generate -DarchetypeGroupId=com.weijuju.iag  -DarchetypeArtifactId=springboot.redisson-archetype -DarchetypeVersion=1.0-SNAPSHOT  -DgroupId="+groupId+" -DartifactId="+artifactId+"             -Dversion="+version+"  -DarchetypeCatalog=local -DdatabaseName="+databaseName+" -DprojectName="+projectName+" -DbasePackage="+basePackage+" -DRedisDB="+redisDB+"";
+            $("#mvn").text(text);
+        }
+
+    });
+</script>
+</html>

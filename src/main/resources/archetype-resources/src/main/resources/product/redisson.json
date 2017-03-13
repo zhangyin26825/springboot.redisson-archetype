@@ -1,0 +1,29 @@
+{
+  "singleServerConfig":{
+    "idleConnectionTimeout":10000,
+    "pingTimeout":1000,
+    "connectTimeout":10000,
+    "timeout":3000,
+    "retryAttempts":3,
+    "retryInterval":1500,
+    "reconnectionTimeout":3000,
+    "failedAttempts":3,
+    "password":null,
+    "subscriptionsPerConnection":5,
+    "clientName":null,
+    "address":[
+      "//10.24.166.188:6379"
+    ],
+    "subscriptionConnectionMinimumIdleSize":1,
+    "subscriptionConnectionPoolSize":50,
+    "connectionMinimumIdleSize":5,
+    "connectionPoolSize":250,
+    "database":${RedisDB},
+    "dnsMonitoring":false,
+    "dnsMonitoringInterval":5000
+  },
+  "threads":4,
+  "codec":null,
+  "useLinuxNativeEpoll":false,
+  "eventLoopGroup":null
+}
